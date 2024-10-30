@@ -13,60 +13,57 @@ import ThemeContext from "../context/ThemeContext";
 import StockContext from "../context/StockContext";
 import { fetchHistoricalData } from "../utils/api/stock-api";
 import {
-  createDate,
-  convertDateToUnixTimestamp,
-  convertUnixTimestampToDate,
+  // createDate,
+  // convertDateToUnixTimestamp,
+  // convertUnixTimestampToDate,
 } from "../utils/helpers/date-helper";
-import { chartConfig } from "../constants/config"; 
+import { chartConfig } from "../constants/config";
 
 const Chart = () => {
-  const [filter, setFilter] = useState("1W");
-
+  const [filter, setFilter] = useState("1D");
   const { darkMode } = useContext(ThemeContext);
-
   const { stockSymbol } = useContext(StockContext);
-
   const [data, setData] = useState([]);
-
+  
   const formatData = (data) => {
-    return data.c.map((item, index) => {
+    return data.prices.map((item, index) => {
       return {
-        value: item.toFixed(2),
-        date: convertUnixTimestampToDate(data.t[index]),
+        value: item[1],
+        date: new Date(item[0]).toLocaleDateString(),
       };
     });
   };
 
   useEffect(() => {
-    const getDateRange = () => {
-      const { days, weeks, months, years } = chartConfig[filter];
-
-      const endDate = new Date();
-      const startDate = createDate(endDate, -days, -weeks, -months, -years);
-
-      const startTimestampUnix = convertDateToUnixTimestamp(startDate);
-      const endTimestampUnix = convertDateToUnixTimestamp(endDate);
-      return { startTimestampUnix, endTimestampUnix };
-    };
+    // const getDateRange = () => {
+    //   const { days, weeks, months, years } = chartConfig[filter];
+    //   const endDate = new Date();
+    //   const startDate = createDate(endDate, -days, -weeks, -months, -years);
+    //   const startTimestampUnix = convertDateToUnixTimestamp(startDate);
+    //   const endTimestampUnix = convertDateToUnixTimestamp(endDate);
+    //   return { startTimestampUnix, endTimestampUnix };
+    // };
 
     const updateChartData = async () => {
       try {
-        const { startTimestampUnix, endTimestampUnix } = getDateRange();
+        // const { startTimestampUnix, endTimestampUnix } = getDateRange();
         const resolution = chartConfig[filter].resolution;
         const result = await fetchHistoricalData(
           stockSymbol,
           resolution,
-          startTimestampUnix,
-          endTimestampUnix
+          // startTimestampUnix,
+          // endTimestampUnix
         );
         setData(formatData(result));
       } catch (error) {
         setData([]);
-        console.log(error);
+        // console.log(result);
       }
     };
 
+    console.log(data);
     updateChartData();
+    // eslint-disable-next-line
   }, [stockSymbol, filter]);
 
   return (
@@ -86,34 +83,34 @@ const Chart = () => {
       </ul>
       <ResponsiveContainer>
         <AreaChart data={data}>
-          <defs>
-            <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor={darkMode ? "#312e81" : "rgb(199 210 254)"}
-                stopOpacity={0.8}
-              />
-              <stop
-                offset="95%"
-                stopColor={darkMode ? "#312e81" : "rgb(199 210 254)"}
-                stopOpacity={0}
-              />
-            </linearGradient>
-          </defs>
           <Tooltip
             contentStyle={darkMode ? { backgroundColor: "#111827" } : null}
             itemStyle={darkMode ? { color: "#818cf8" } : null}
+            cursor={false}
+            formatter={(value) => [`${value}`, 'Prix']}
+            
           />
           <Area
             type="monotone"
+            // dataKey="prix"
             dataKey="value"
-            stroke="#312e81"
+            // stroke="#312e81"
+            stroke={darkMode ? "#818cf8" : "#312e81"}
             fill="url(#chartColor)"
             fillOpacity={1}
             strokeWidth={0.5}
+            // dot={true}
+            dot={{ r: 3, fill: darkMode ? "#818cf8" : "#312e81" }} // Couleur des points
           />
+
           <XAxis dataKey="date" />
-          <YAxis domain={["dataMin", "dataMax"]} />
+          
+          <YAxis
+          tick={false}
+            // domain={["dataMin", "dataMax"]}
+            domain={[(dataMin) => dataMin * 0.99, "dataMax"]}
+          />
+
         </AreaChart>
       </ResponsiveContainer>
     </Card>

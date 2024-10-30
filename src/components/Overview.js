@@ -1,12 +1,23 @@
 import React from "react";
 import Card from "./Card";
 
-const Overview = ({ symbol, price, change, changePercent, currency }) => {
+const Overview = ({ symbol, price, change, changePercent, currency,logoLink }) => {
   return (
     <Card>
-      <span className="absolute left-4 top-4 text-neutral-400 text-lg xl:text-xl 2xl:text-2xl">
+      {/* <span className="absolute left-4 top-4 text-neutral-400 text-lg xl:text-xl 2xl:text-2xl">
         {symbol}
-      </span>
+      </span> */}
+      <div className="d-flex items-center	justify-items-center gap-4	 ">
+        
+        <img
+          src={logoLink}
+          alt="bitcoin"
+          className="w-[3rem] h-[3rem] mx-1.5"
+        ></img>
+        <h1 className="capitalize text-neutral-400 text-2xl font-bold text-center d-block">
+          {symbol}
+        </h1>
+      </div>
       <div className="w-full h-full flex items-center justify-around">
         <span className="text-2xl xl:text-4xl 2xl:text-5xl flex items-center">
           ${price}

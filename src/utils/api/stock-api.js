@@ -6,8 +6,17 @@ const basePath = "https://finnhub.io/api/v1";
  * @returns {Promise<Object[]>} Response array of best stock matches
  */
 export const searchSymbol = async (query) => {
-  const url = `${basePath}/search?q=${query}&token=${process.env.REACT_APP_API_KEY}`;
-  const response = await fetch(url);
+  // const url = `${basePath}/search?q=${query}&token=${process.env.REACT_APP_API_KEY}`;
+  // const response = await fetch(url);
+
+  const url = `https://api.coingecko.com/api/v3/search?query=${query}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-cg-demo-api-key": `${process.env.REACT_APP_API_KEY_COINGECKO}`,
+    },
+  });
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -23,8 +32,17 @@ export const searchSymbol = async (query) => {
  * @returns {Promise<Object>} Response object
  */
 export const fetchStockDetails = async (stockSymbol) => {
-  const url = `${basePath}/stock/profile2?symbol=${stockSymbol}&token=${process.env.REACT_APP_API_KEY}`;
-  const response = await fetch(url);
+  // const url = `${basePath}/stock/profile2?symbol=${stockSymbol}&token=${process.env.REACT_APP_API_KEY}`;
+  // const response = await fetch(url);
+
+  const url = `https://api.coingecko.com/api/v3/coins/${stockSymbol}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-cg-demo-api-key": `${process.env.REACT_APP_API_KEY_COINGECKO}`,
+    },
+  });
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -59,14 +77,16 @@ export const fetchQuote = async (stockSymbol) => {
  * @param {number} to - UNIX timestamp (seconds elapsed since January 1st, 1970 at UTC). Interval end value.
  * @returns {Promise<Object>} Response object
  */
-export const fetchHistoricalData = async (
-  stockSymbol,
-  resolution,
-  from,
-  to
-) => {
-  const url = `${basePath}/stock/candle?symbol=${stockSymbol}&resolution=${resolution}&from=${from}&to=${to}&token=${process.env.REACT_APP_API_KEY}`;
-  const response = await fetch(url);
+export const fetchHistoricalData = async (stockSymbol, resolution) => {
+  // const url = `https://api.coingecko.com/api/v3/coins/${stockSymbol}/market_chart?vs_currency=usd&days=5&interval=${resolution}&precision=3`;
+  const url = `https://api.coingecko.com/api/v3/coins/${stockSymbol}/market_chart?vs_currency=usd&days=5&interval=daily&precision=3`;
+  const response = await fetch(url, {
+    method: "GET",
+    // headers: {
+    //   accept: "application/json",
+    //   'x-cg-demo-api-key': `${process.env.REACT_APP_API_KEY_COINGECKO}`,
+    // },
+  });
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;

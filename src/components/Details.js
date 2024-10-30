@@ -6,17 +6,19 @@ const Details = ({ details }) => {
   const { darkMode } = useContext(ThemeContext);
 
   const detailsList = {
-    name: "Name",
-    country: "Country",
-    currency: "Currency",
-    exchange: "Exchange",
-    ipo: "IPO Date",
-    marketCapitalization: "Market Capitalization",
-    finnhubIndustry: "Industry",
+    name: "Nom",
+    symbol: "Symbole",
+    genesis_date: "Création",
+    hashing_algorithm: "Hachage",
   };
 
-  const convertMillionToBillion = (number) => {
-    return (number / 1000).toFixed(2);
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return `${date.getDate().toString().padStart(2, "0")}-${(
+      date.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${date.getFullYear()}`;
   };
 
   return (
@@ -27,13 +29,18 @@ const Details = ({ details }) => {
         }`}
       >
         {Object.keys(detailsList).map((item) => {
+          let displayValue = details[item];
+          if (item === "symbol") {
+            displayValue = displayValue?.toUpperCase();
+          } else if (item === "genesis_date" && displayValue) {
+            displayValue = formatDate(displayValue);
+          }
           return (
             <li key={item} className="flex-1 flex justify-between items-center">
               <span>{detailsList[item]}</span>
               <span className="font-bold">
-                {item === "marketCapitalization"
-                  ? `${convertMillionToBillion(details[item])}B`
-                  : details[item]}
+                {/* {details[item]} */}
+                {displayValue}
               </span>
             </li>
           );

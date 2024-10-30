@@ -18,14 +18,14 @@ const SearchResults = ({ results }) => {
       {results.map((item) => {
         return (
           <li
-            key={item.symbol}
+            key={item.name}
             className={`cursor-pointer p-4 m-2 flex items-center justify-between rounded-md ${
               darkMode ? "hover:bg-indigo-600" : "hover:bg-indigo-200 "
             } transition duration-300`}
-            onClick={() => setStockSymbol(item.symbol)}
+            onClick={() => setStockSymbol(item.api_symbol)}
           >
+            <span>{item.name}</span>
             <span>{item.symbol}</span>
-            <span>{item.description}</span>
           </li>
         );
       })}

@@ -5,16 +5,13 @@ import Details from "./Details";
 import Chart from "./Chart";
 import Header from "./Header";
 import StockContext from "../context/StockContext";
-import { fetchStockDetails, fetchQuote } from "../utils/api/stock-api";
+import { fetchStockDetails } from "../utils/api/stock-api";
 
 const Dashboard = () => {
   const { darkMode } = useContext(ThemeContext);
-
   const { stockSymbol } = useContext(StockContext);
-
   const [stockDetails, setStockDetails] = useState({});
-
-  const [quote, setQuote] = useState({});
+  // console.log(JSON.stringify(stockDetails, null, 2));
 
   useEffect(() => {
     const updateStockDetails = async () => {
@@ -26,28 +23,21 @@ const Dashboard = () => {
         console.log(error);
       }
     };
-
-    const updateStockOverview = async () => {
-      try {
-        const result = await fetchQuote(stockSymbol);
-        setQuote(result);
-      } catch (error) {
-        setQuote({});
-        console.log(error);
-      }
-    };
-
+    // console.log(stockDetails);
     updateStockDetails();
-    updateStockOverview();
+    // eslint-disable-next-line
   }, [stockSymbol]);
 
   return (
     <div
-      className={`h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-5 auto-rows-fr gap-6 p-10 font-quicksand ${
+      // className={`grid-rows-[auto, 1fr, 1fr, 1fr, ...] h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-5 auto-rows-fr gap-6 p-10 pt-0 font-quicksand ${
+      //   darkMode ? "bg-gray-900 text-gray-300" : "bg-neutral-100"
+      // }`}
+      className={`grid-rows-[auto, 1fr, 1fr, 1fr, ...] h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-10 pt-0 font-quicksand min-h-screen h-fit	${
         darkMode ? "bg-gray-900 text-gray-300" : "bg-neutral-100"
       }`}
     >
-      <div className="col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
+      <div className="col-span-1 md:col-span-2 xl:col-span-3 flex justify-between items-center py-3">
         <Header name={stockDetails.name} />
       </div>
       <div className="md:col-span-2 row-span-4">
@@ -56,9 +46,12 @@ const Dashboard = () => {
       <div>
         <Overview
           symbol={stockSymbol}
-          price={quote.pc}
-          change={quote.d}
-          changePercent={quote.dp}
+          price={stockDetails.market_data?.current_price?.usd}
+          change={stockDetails.market_data?.price_change_24h}
+          changePercent={stockDetails.market_data?.market_cap_change_percentage_24h?.toFixed(
+            2
+          )}
+          logoLink={stockDetails.image?.small}
           currency={stockDetails.currency}
         />
       </div>
