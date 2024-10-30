@@ -24,7 +24,7 @@ const Details = ({ details }) => {
   return (
     <Card>
       <ul
-        className={`w-full h-full flex flex-col justify-between divide-y-1 ${
+        className={`w-full h-full flex flex-col justify-between divide-y-1 p-2 xl:p-0 ${
           darkMode ? "divide-gray-800" : null
         }`}
       >
@@ -36,7 +36,7 @@ const Details = ({ details }) => {
             displayValue = formatDate(displayValue);
           }
           return (
-            <li key={item} className="flex-1 flex justify-between items-center">
+            <li key={item} className="flex-1 flex justify-between items-center p-3 xl:p-0">
               <span>{detailsList[item]}</span>
               <span className="font-bold">
                 {/* {details[item]} */}

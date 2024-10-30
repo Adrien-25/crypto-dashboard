@@ -2,11 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import ChartFilter from "./ChartFilter";
 import Card from "./Card";
 import {
-  Area,
   XAxis,
   YAxis,
   ResponsiveContainer,
-  AreaChart,
   LineChart,
   Tooltip,
   Line,

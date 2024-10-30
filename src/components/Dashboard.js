@@ -41,7 +41,10 @@ const Dashboard = () => {
       <div className="md:col-span-2 row-span-4">
         <Chart />
       </div>
-      <div>
+      <div
+        className="row-span-2 xl:row-auto"
+        // style={{ height: "unset", important: "true" }}
+      >
         <Overview
           symbol={stockSymbol}
           price={stockDetails.market_data?.current_price?.usd}
