@@ -31,7 +31,7 @@ const Dashboard = () => {
   return (
     <div
       style={{ height: "fit-content", important: "true" }}
-      className={`grid-rows-[auto, 1fr, 1fr, 1fr, ...] h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-10 pt-0 font-quicksand min-h-screen 	${
+      className={`grid-rows-[auto, 1fr, 1fr, 1fr, ...] h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-5 pb-10 md:px-10 pt-0 font-quicksand min-h-screen 	${
         darkMode ? "bg-gray-900 text-gray-300" : "bg-neutral-100"
       }`}
     >

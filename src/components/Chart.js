@@ -7,16 +7,17 @@ import {
   YAxis,
   ResponsiveContainer,
   AreaChart,
+  LineChart,
   Tooltip,
+  Line,
 } from "recharts";
 import ThemeContext from "../context/ThemeContext";
 import StockContext from "../context/StockContext";
 import { fetchHistoricalData } from "../utils/api/stock-api";
-import {
-  // createDate,
-  // convertDateToUnixTimestamp,
-  // convertUnixTimestampToDate,
-} from "../utils/helpers/date-helper";
+import // createDate,
+// convertDateToUnixTimestamp,
+// convertUnixTimestampToDate,
+"../utils/helpers/date-helper";
 import { chartConfig } from "../constants/config";
 
 const Chart = () => {
@@ -24,7 +25,7 @@ const Chart = () => {
   const { darkMode } = useContext(ThemeContext);
   const { stockSymbol } = useContext(StockContext);
   const [data, setData] = useState([]);
-  
+
   const formatData = (data) => {
     return data.prices.map((item, index) => {
       return {
@@ -50,7 +51,7 @@ const Chart = () => {
         const resolution = chartConfig[filter].resolution;
         const result = await fetchHistoricalData(
           stockSymbol,
-          resolution,
+          resolution
           // startTimestampUnix,
           // endTimestampUnix
         );
@@ -81,18 +82,16 @@ const Chart = () => {
           </li>
         ))}
       </ul>
-      <ResponsiveContainer>
-        <AreaChart data={data}>
+      <ResponsiveContainer className="p-0">
+        <LineChart  data={data}>
           <Tooltip
             contentStyle={darkMode ? { backgroundColor: "#111827" } : null}
             itemStyle={darkMode ? { color: "#818cf8" } : null}
             cursor={false}
-            formatter={(value) => [`${value}`, 'Prix']}
-            
+            formatter={(value) => [`${value}`, "Prix"]}
           />
-          <Area
+          <Line
             type="monotone"
-            // dataKey="prix"
             dataKey="value"
             // stroke="#312e81"
             stroke={darkMode ? "#818cf8" : "#312e81"}
@@ -103,15 +102,14 @@ const Chart = () => {
             dot={{ r: 3, fill: darkMode ? "#818cf8" : "#312e81" }} // Couleur des points
           />
 
-          <XAxis dataKey="date" />
-          
+          <XAxis dataKey="date" tick={false} />
+
           <YAxis
-          tick={false}
+            tick={false}
             // domain={["dataMin", "dataMax"]}
             domain={[(dataMin) => dataMin * 0.99, "dataMax"]}
           />
-
-        </AreaChart>
+        </LineChart >
       </ResponsiveContainer>
     </Card>
   );
