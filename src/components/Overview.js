@@ -7,7 +7,7 @@ const Overview = ({ symbol, price, change, changePercent, currency,logoLink }) =
       {/* <span className="absolute left-4 top-4 text-neutral-400 text-lg xl:text-xl 2xl:text-2xl">
         {symbol}
       </span> */}
-      <div className="d-flex items-center	justify-items-center gap-4	 ">
+      <div className="flex items-center	justify-center gap-4 items-center">
         
         <img
           src={logoLink}

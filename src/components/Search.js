@@ -32,14 +32,14 @@ const Search = () => {
 
   return (
     <div
-      className={`flex items-center my-4 border-2 rounded-md relative z-50 w-96 ${
+      className={`flex items-center my-4 border-2 rounded-md relative z-50 w-96  mx-auto md:mx-0 max-w-full ${
         darkMode ? "bg-gray-900 border-gray-800" : "bg-white border-neutral-200"
       }`}
     >
       <input
         type="text"
         value={input}
-        className={`w-full px-4 py-2 focus:outline-none rounded-md ${
+        className={`w-full px-4 py-2 focus:outline-none rounded-md  ${
           darkMode ? "bg-gray-900" : null
         }`}
         placeholder="Rechercher une crypto..."

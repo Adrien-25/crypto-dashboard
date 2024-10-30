@@ -5,7 +5,7 @@ import ThemeIcon from "./ThemeIcon";
 const Header = ({ name }) => {
   return (
     <>
-      <div className="">
+      <div className="w-full">
         {/* <h1 className="text-5xl">{name}</h1> */}
         <Search />
       </div>

@@ -30,14 +30,12 @@ const Dashboard = () => {
 
   return (
     <div
-      // className={`grid-rows-[auto, 1fr, 1fr, 1fr, ...] h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-5 auto-rows-fr gap-6 p-10 pt-0 font-quicksand ${
-      //   darkMode ? "bg-gray-900 text-gray-300" : "bg-neutral-100"
-      // }`}
-      className={`grid-rows-[auto, 1fr, 1fr, 1fr, ...] h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-10 pt-0 font-quicksand min-h-screen h-fit	${
+      style={{ height: "fit-content", important: "true" }}
+      className={`grid-rows-[auto, 1fr, 1fr, 1fr, ...] h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-10 pt-0 font-quicksand min-h-screen 	${
         darkMode ? "bg-gray-900 text-gray-300" : "bg-neutral-100"
       }`}
     >
-      <div className="col-span-1 md:col-span-2 xl:col-span-3 flex justify-between items-center py-3">
+      <div className="col-span-1 md:col-span-2 xl:col-span-3 flex justify-between  py-3 flex-col-reverse md:flex-row items-start md:items-center">
         <Header name={stockDetails.name} />
       </div>
       <div className="md:col-span-2 row-span-4">
