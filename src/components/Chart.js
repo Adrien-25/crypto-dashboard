@@ -8,6 +8,7 @@ import {
   LineChart,
   Tooltip,
   Line,
+  // LabelList,
 } from "recharts";
 import ThemeContext from "../context/ThemeContext";
 import StockContext from "../context/StockContext";
@@ -80,8 +81,8 @@ const Chart = () => {
           </li>
         ))}
       </ul>
-      <ResponsiveContainer className="p-0">
-        <LineChart  data={data}>
+      <ResponsiveContainer className="p-0" width="100%" height="100%">
+        <LineChart data={data}>
           <Tooltip
             contentStyle={darkMode ? { backgroundColor: "#111827" } : null}
             itemStyle={darkMode ? { color: "#818cf8" } : null}
@@ -99,15 +100,17 @@ const Chart = () => {
             // dot={true}
             dot={{ r: 3, fill: darkMode ? "#818cf8" : "#312e81" }} // Couleur des points
           />
+         
 
-          <XAxis dataKey="date" tick={false} />
+          <XAxis dataKey="date" tick={false} hide={true} />
 
           <YAxis
             tick={false}
             // domain={["dataMin", "dataMax"]}
             domain={[(dataMin) => dataMin * 0.99, "dataMax"]}
+            hide={true}
           />
-        </LineChart >
+        </LineChart>
       </ResponsiveContainer>
     </Card>
   );

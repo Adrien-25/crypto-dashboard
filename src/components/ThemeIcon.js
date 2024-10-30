@@ -17,7 +17,7 @@ const ThemeIcon = () => {
       }`}
     >
       <MoonIcon
-        className={`h-8 w-8 cursor-pointer stroke-1 ${
+        className={`h-6 w-6 md:h-8 md:w-8 cursor-pointer stroke-1 ${
           darkMode
             ? "fill-yellow-400 stroke-yellow-400"
             : "fill-none stroke-neutral-400"

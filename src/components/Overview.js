@@ -14,7 +14,7 @@ const Overview = ({
       {/* <span className="absolute left-4 top-4 text-neutral-400 text-lg xl:text-xl 2xl:text-2xl">
         {symbol}
       </span> */}
-      <div class="flex h-full flex-col justify-center">
+      <div className="flex h-full flex-col justify-center">
         <div className="flex items-center	justify-center gap-3 items-center py-3 xl:p-0">
           <img
             src={logoLink}
