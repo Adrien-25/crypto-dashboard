@@ -8,6 +8,7 @@ import {
   LineChart,
   Tooltip,
   Line,
+  CartesianGrid,
   // LabelList,
 } from "recharts";
 import ThemeContext from "../context/ThemeContext";
@@ -57,7 +58,6 @@ const Chart = () => {
         setData(formatData(result));
       } catch (error) {
         setData([]);
-        // console.log(result);
       }
     };
 
@@ -83,6 +83,12 @@ const Chart = () => {
       </ul>
       <ResponsiveContainer className="p-0" width="100%" height="100%">
         <LineChart data={data}>
+          <CartesianGrid
+            // strokeDasharray="3 3"
+            stroke={darkMode ? "#4B5563" : "#E5E7EB"}
+            strokeOpacity={0.2}
+          />
+
           <Tooltip
             contentStyle={darkMode ? { backgroundColor: "#111827" } : null}
             itemStyle={darkMode ? { color: "#818cf8" } : null}
@@ -92,22 +98,22 @@ const Chart = () => {
           <Line
             type="monotone"
             dataKey="value"
-            // stroke="#312e81"
             stroke={darkMode ? "#818cf8" : "#312e81"}
-            fill="url(#chartColor)"
-            fillOpacity={1}
-            strokeWidth={0.5}
+            // fill="url(#chartColor)"
+            // fillOpacity={1}
+            // strokeWidth={0.5}
+            dot={{ r: 3, fill: darkMode ? "#818cf8" : "#312e81" }}
             // dot={true}
-            dot={{ r: 3, fill: darkMode ? "#818cf8" : "#312e81" }} // Couleur des points
           />
-         
 
-          <XAxis dataKey="date" tick={false} hide={true} />
-
+          <XAxis
+            dataKey="date"
+            // tick={false}
+            // hide={true}
+          />
           <YAxis
-            tick={false}
-            // domain={["dataMin", "dataMax"]}
-            domain={[(dataMin) => dataMin * 0.99, "dataMax"]}
+            domain={[(dataMin) => dataMin * 0.99, (dataMax) => dataMax * 1.01]}
+            // tick={false}
             hide={true}
           />
         </LineChart>
