@@ -29,8 +29,8 @@ const Search = () => {
     setBestMatches([]);
   };
   const handleResultClick = () => {
-    setBestMatches([]); // Efface les résultats
-    setInput(""); // Optionnel : effacer le champ de saisie
+    setBestMatches([]); 
+    setInput(""); 
   };
 
   return (

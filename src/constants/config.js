@@ -1,8 +1,8 @@
 export const chartConfig = {
   // "1D": { resolution: "1", days: 1, weeks: 0, months: 0, years: 0 },
   "1D": { resolution: "daily", precision: 7},
-  "1W": { resolution: "15", precision: 35},
-  "1M": { resolution: "60", precision: 150},
+  // "1W": { resolution: "15", precision: 35},
+  // "1M": { resolution: "60", precision: 150},
 };
 
 // export const chartConfig = {

@@ -33,12 +33,16 @@ const Overview = ({
             </span>
           </span>
           <span
-            className={`text-lg xl:text-xl 2xl:text-2xl ${
-              change > 0 ? "text-lime-500" : "text-red-500"
+            // className={`text-lg xl:text-xl 2xl:text-2xl bg-opacity-25 ${
+            // change > 0 ? "text-lime-500" : "text-red-500"
+            className={`text-lg xl:text-xl 2xl:text-2xl p-2 rounded-lg ${
+              change > 0
+                ? "text-green-500 text-cyan bg-green-500/25"
+                : "text-red-500 text-red bg-red-500/25"
             }`}
           >
             {/* {change}  */}
-            <span>({changePercent}%)</span>
+            <span>{changePercent}%</span>
           </span>
         </div>
       </div>
