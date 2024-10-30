@@ -61,7 +61,6 @@ const Chart = () => {
       }
     };
 
-    console.log(data);
     updateChartData();
     // eslint-disable-next-line
   }, [stockSymbol, filter]);

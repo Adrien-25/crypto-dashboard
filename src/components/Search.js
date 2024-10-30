@@ -15,7 +15,6 @@ const Search = () => {
     try {
       if (input) {
         const searchResults = await searchSymbol(input);
-        console.log(searchResults);
         const result = searchResults.coins;
         setBestMatches(result);
       }
@@ -28,6 +27,10 @@ const Search = () => {
   const clear = () => {
     setInput("");
     setBestMatches([]);
+  };
+  const handleResultClick = () => {
+    setBestMatches([]); // Efface les résultats
+    setInput(""); // Optionnel : effacer le champ de saisie
   };
 
   return (
@@ -62,7 +65,7 @@ const Search = () => {
         <SearchIcon className="h-4 w-4 fill-gray-100" />
       </button>
       {input && bestMatches.length > 0 ? (
-        <SearchResults results={bestMatches} />
+        <SearchResults results={bestMatches} onResultClick={handleResultClick} />
       ) : null}
     </div>
   );

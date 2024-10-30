@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import StockContext from "../context/StockContext";
 import ThemeContext from "../context/ThemeContext";
 
-const SearchResults = ({ results }) => {
+const SearchResults = ({ results,onResultClick }) => {
   const { darkMode } = useContext(ThemeContext);
 
   const { setStockSymbol } = useContext(StockContext);
@@ -14,6 +14,7 @@ const SearchResults = ({ results }) => {
           ? "bg-gray-900 border-gray-800 custom-scrollbar custom-scrollbar-dark"
           : "bg-white border-neutral-200 custom-scrollbar"
       }`}
+      
     >
       {results.map((item) => {
         return (
@@ -22,7 +23,11 @@ const SearchResults = ({ results }) => {
             className={`cursor-pointer p-4 m-2 flex items-center justify-between rounded-md ${
               darkMode ? "hover:bg-indigo-600" : "hover:bg-indigo-200 "
             } transition duration-300`}
-            onClick={() => setStockSymbol(item.api_symbol)}
+            // onClick={() => setStockSymbol(item.api_symbol)}
+            onClick={() => {
+              setStockSymbol(item.api_symbol);
+              onResultClick(); // Appeler la fonction de rappel ici
+            }}
           >
             <span>{item.name}</span>
             <span>{item.symbol}</span>
